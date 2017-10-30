@@ -8,11 +8,21 @@ class HomeController < ActionController::Base
   def upload
     begin
       @file = params[:order_file]
-      order = OrderParser.parse_tab_separated_file @file
-      OrderService.persist(order)
-    rescue Exception
-      flash[:message] = 'Houve um erro ao importar o arquivo'
+      order = OrderParser.new(@file).parse_tab_separated
+      OrderService.new(order).call
+      flash[:message] = 'Arquivo importado com sucesso!'
       redirect_to home_index_path
+    rescue Exception
+      redirect_with_alert
+    rescue Exception::NoMethodError
+      redirect_with_alert
     end
+  end
+
+  private
+
+  def redirect_with_alert
+    flash[:message] = 'Houve um erro ao importar o arquivo'
+    redirect_to home_index_path
   end
 end
