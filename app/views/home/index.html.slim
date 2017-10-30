@@ -1,1 +1,8 @@
 h1 Hello!
+
+- if flash[:message]
+ .notice = flash[:message]
+
+= form_tag('/home/upload', method: "post")
+  = file_field_tag 'order_file'
+  = submit_tag("Enviar")
