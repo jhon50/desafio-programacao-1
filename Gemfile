@@ -57,3 +57,4 @@ gem 'devise'
 
 gem 'slim-rails'
 
+gem 'devise-bootstrap-views'
