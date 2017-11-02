@@ -1,24 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Importador TSV
 
-Things you may want to cover:
+Passos para rodar a aplicação
 
-* Ruby version
+- Configurar servidor mysql
+- Alterar credenciais de acesso do banco de dados em config/application.yml
+- rake db:setup
+- rake db:migrate
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Oauth está utilizando um app genérico do Facebook.
