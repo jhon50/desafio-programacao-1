@@ -3,6 +3,6 @@ h1 Hello!
 - if flash[:message]
  .notice = flash[:message]
 
-= form_tag('/home/upload', method: "post")
-  = file_field_tag 'order_file'
+= form_tag('/home/upload', method: "post",  multipart: true)
+  = file_field_tag 'file', accept: 'text/html', class: 'upload'
   = submit_tag("Enviar")

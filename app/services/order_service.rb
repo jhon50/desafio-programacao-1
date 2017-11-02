@@ -5,18 +5,21 @@ class OrderService
 
   def call
     create_order
-    persist_order
   end
 
   private
 
-  def persist_order
-    Order.create! {
-
-    }
-  end
-
   def create_order
-    @created_order = OrderCreator.new(@order)
+    @order.each do |row|
+      Order.create!({
+        :customer_id => Customer.get_customer_id(row),
+        :item_description => row['item description'],
+        :item_price => row['item price'],
+        :purchase_count => row['purchase count'],
+        :merchant_id => Merchant.get_merchant_id(row)
+      })
+    end
+    ## CASO NAO EXISTA CUSTOMER OU MERCHANT ELE IRÁ CRIAR E RETORNAR O ID
+    ## CASO JA EXISTA RETORNA APENAS O ID E SALVA O ORDER! SIMPLES ASSIM!
   end
 end
