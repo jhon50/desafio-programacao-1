@@ -58,3 +58,7 @@ gem 'devise'
 gem 'slim-rails'
 
 gem 'devise-bootstrap-views'
+
+gem 'omniauth-facebook'
+
+gem "figaro"
