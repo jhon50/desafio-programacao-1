@@ -9,8 +9,8 @@ class HomeController < ActionController::Base
     begin
       @file = params[:file]
       order = OrderParserService.new(@file).parse_tab_separated
-      OrderService.new(order).call
-      redirect_with_alert('Arquivo importado com sucesso!')
+      @total_value = OrderService.new(order).call
+      redirect_with_alert("Arquivo importado com sucesso! O valor total é #{@total_value}")
     rescue Exception
       redirect_with_alert('Houve um erro ao importar o arquivo')
     rescue Exception::NoMethodError

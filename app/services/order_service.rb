@@ -4,12 +4,14 @@ class OrderService
   end
 
   def call
-    create_order
+    total_value = create_order
+
   end
 
   private
 
   def create_order
+    total_value = 0
     @order.each do |row|
       Order.create!({
         :customer_id => Customer.get_customer_id(row),
@@ -18,8 +20,8 @@ class OrderService
         :purchase_count => row['purchase count'],
         :merchant_id => Merchant.get_merchant_id(row)
       })
+      total_value += row['item price'].to_f * row['purchase count'].to_f
     end
-    ## CASO NAO EXISTA CUSTOMER OU MERCHANT ELE IRÁ CRIAR E RETORNAR O ID
-    ## CASO JA EXISTA RETORNA APENAS O ID E SALVA O ORDER! SIMPLES ASSIM!
+    total_value
   end
 end
